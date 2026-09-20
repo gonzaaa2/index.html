@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Angus Brothers | Panel</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #0d0d0d;
+    color: #fff;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 240px;
+    height: 100vh;
+    background: #151515;
+    border-right: 1px solid #292929;
+    padding: 25px 18px;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 35px;
+}
+
+.logo span {
+    color: #e63920;
+}
+
+.menu button {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: #aaa;
+    padding: 14px;
+    text-align: left;
+    border-radius: 10px;
+    margin-bottom: 7px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.menu button:hover,
+.menu button.active {
+    background: #252525;
+    color: white;
+}
+
+/* MAIN */
+
+.main {
+    margin-left: 240px;
+    padding: 35px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 30px;
+}
+
+.header p {
+    color: #888;
+    margin-top: 5px;
+}
+
+.profile {
+    background: #1c1c1c;
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+/* CARDS */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: #171717;
+    border: 1px solid #292929;
+    padding: 22px;
+    border-radius: 15px;
+}
+
+.card h3 {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.card strong {
+    font-size: 28px;
+}
+
+/* CONTENT */
+
+.section {
+    background: #171717;
+    border: 1px solid #292929;
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.section-header h2 {
+    font-size: 20px;
+}
+
+.search {
+    background: #222;
+    border: 1px solid #333;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    width: 250px;
+}
+
+/* TABLE */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+    color: #777;
+    font-size: 13px;
+    padding: 12px;
+    border-bottom: 1px solid #292929;
+}
+
+td {
+    padding: 16px 12px;
+    border-bottom: 1px solid #242424;
+}
+
+.client {
+    font-weight: bold;
+}
+
+.small {
+    color: #777;
+    font-size: 13px;
+}
+
+.points {
+    color: #ffb703;
+    font-weight: bold;
+}
+
+.badge {
+    background: #1d442a;
+    color: #6ee787;
+    padding: 6px 9px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+/* BUTTON */
+
+.add-btn {
+    background: #e63920;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.add-btn:hover {
+    background: #ff492e;
+}
+
+/* MODAL */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.75);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-box {
+    background: #181818;
+    width: 420px;
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid #333;
+}
+
+.modal-box h2 {
+    margin-bottom: 20px;
+}
+
+.modal-box input {
+    width: 100%;
+    background: #222;
+    border: 1px solid #333;
+    color: white;
+    padding: 13px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.cancel {
+    background: #333;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    flex: 1;
+}
+
+.save {
+    background: #e63920;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    flex: 1;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 900px) {
+
+    .sidebar {
+        width: 190px;
+    }
+
+    .main {
+        margin-left: 190px;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 650px) {
+
+    .sidebar {
+        display: none;
+    }
+
+    .main {
+        margin-left: 0;
+        padding: 20px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .search {
+        width: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        ANGUS <span>BROTHERS</span>
+    </div>
+
+    <div class="menu">
+
+        <button class="active">
+            📊 Dashboard
+        </button>
+
+        <button onclick="mostrarClientes()">
+            👥 Clientes
+        </button>
+
+        <button>
+            🛒 Pedidos
+        </button>
+
+        <button>
+            ⭐ Fidelización
+        </button>
+
+        <button>
+            ⚙️ Configuración
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+    <div class="header">
+
+        <div>
+            <h1>Dashboard</h1>
+            <p>Panel de administración de Angus Brothers</p>
+        </div>
+
+        <div class="profile">
+            👤 Administrador
+        </div>
+
+    </div>
+
+
+    <!-- STATS -->
+
+    <div class="stats">
+
+        <div class="card">
+            <h3>CLIENTES</h3>
+            <strong id="totalClientes">0</strong>
+        </div>
+
+        <div class="card">
+            <h3>PEDIDOS HOY</h3>
+            <strong>47</strong>
+        </div>
+
+        <div class="card">
+            <h3>VENTAS HOY</h3>
+            <strong>$485K</strong>
+        </div>
+
+        <div class="card">
+            <h3>CLIENTES FRECUENTES</h3>
+            <strong>86</strong>
+        </div>
+
+    </div>
+
+
+    <!-- CLIENTES -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <h2>Clientes recientes</h2>
+
+            <div>
+
+                <input
+                    class="search"
+                    id="search"
+                    placeholder="🔎 Buscar cliente..."
+                    oninput="buscarCliente()"
+                >
+
+                <button class="add-btn" onclick="abrirModal()">
+                    + Nuevo cliente
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>CLIENTE</th>
+                    <th>TELÉFONO</th>
+                    <th>PEDIDOS</th>
+                    <th>PUNTOS</th>
+                    <th>ESTADO</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="tablaClientes"></tbody>
+
+        </table>
+
+    </section>
+
+</main>
+
+
+<!-- MODAL -->
+
+<div class="modal" id="modal">
+
+    <div class="modal-box">
+
+        <h2>Nuevo cliente</h2>
+
+        <input
+            id="nombre"
+            placeholder="Nombre completo"
+        >
+
+        <input
+            id="telefono"
+            placeholder="Teléfono"
+        >
+
+        <input
+            id="direccion"
+            placeholder="Dirección"
+        >
+
+        <div class="modal-buttons">
+
+            <button class="cancel" onclick="cerrarModal()">
+                Cancelar
+            </button>
+
+            <button class="save" onclick="guardarCliente()">
+                Guardar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   CLIENTES INICIALES
+========================= */
+
+let clientes = JSON.parse(localStorage.getItem("angusClientes")) || [
+
+    {
+        nombre: "Juan Pérez",
+        telefono: "11 5555-1234",
+        pedidos: 14,
+        puntos: 850,
+        estado: "Frecuente"
+    },
+
+    {
+        nombre: "Martín López",
+        telefono: "11 5555-5678",
+        pedidos: 8,
+        puntos: 420,
+        estado: "Activo"
+    },
+
+    {
+        nombre: "Sofía García",
+        telefono: "11 5555-9012",
+        pedidos: 21,
+        puntos: 1250,
+        estado: "Frecuente"
+    },
+
+    {
+        nombre: "Lucas Fernández",
+        telefono: "11 5555-3456",
+        pedidos: 3,
+        puntos: 150,
+        estado: "Nuevo"
+    }
+
+];
+
+
+/* =========================
+   MOSTRAR CLIENTES
+========================= */
+
+function mostrarClientes(lista = clientes) {
+
+    const tabla = document.getElementById("tablaClientes");
+
+    tabla.innerHTML = "";
+
+    lista.forEach(cliente => {
+
+        tabla.innerHTML += `
+
+            <tr>
+
+                <td>
+
+                    <div class="client">
+                        ${cliente.nombre}
+                    </div>
+
+                    <div class="small">
+                        Cliente Angus Brothers
+                    </div>
+
+                </td>
+
+                <td>
+                    ${cliente.telefono}
+                </td>
+
+                <td>
+                    ${cliente.pedidos}
+                </td>
+
+                <td>
+
+                    <span class="points">
+                        ⭐ ${cliente.puntos}
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <span class="badge">
+                        ${cliente.estado}
+                    </span>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+    document.getElementById("totalClientes").textContent =
+        clientes.length;
+}
+
+
+/* =========================
+   BUSCADOR
+========================= */
+
+function buscarCliente() {
+
+    const texto =
+        document.getElementById("search")
+        .value
+        .toLowerCase();
+
+    const resultados =
+        clientes.filter(cliente =>
+            cliente.nombre
+            .toLowerCase()
+            .includes(texto)
+        );
+
+    mostrarClientes(resultados);
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+function abrirModal() {
+
+    document.getElementById("modal").style.display =
+        "flex";
+
+}
+
+
+function cerrarModal() {
+
+    document.getElementById("modal").style.display =
+        "none";
+
+}
+
+
+/* =========================
+   GUARDAR CLIENTE
+========================= */
+
+function guardarCliente() {
+
+    const nombre =
+        document.getElementById("nombre").value;
+
+    const telefono =
+        document.getElementById("telefono").value;
+
+    const direccion =
+        document.getElementById("direccion").value;
+
+
+    if (!nombre || !telefono) {
+
+        alert("Completá el nombre y teléfono.");
+
+        return;
+
+    }
+
+
+    const nuevoCliente = {
+
+        nombre: nombre,
+
+        telefono: telefono,
+
+        direccion: direccion,
+
+        pedidos: 0,
+
+        puntos: 0,
+
+        estado: "Nuevo"
+
+    };
+
+
+    clientes.push(nuevoCliente);
+
+
+    localStorage.setItem(
+        "angusClientes",
+        JSON.stringify(clientes)
+    );
+
+
+    document.getElementById("nombre").value = "";
+    document.getElementById("telefono").value = "";
+    document.getElementById("direccion").value = "";
+
+
+    cerrarModal();
+
+    mostrarClientes();
+
+}
+
+
+/* =========================
+   INICIO
+========================= */
+
+mostrarClientes();
+
+</script>
+
+</body>
+</html>
