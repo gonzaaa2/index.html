@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Angus Brothers | Administración</title>
+<title>Angus Brothers | Panel</title>
 
 <style>
 * {
@@ -18,8 +17,6 @@ body {
     background: #0d0d0d;
     color: white;
 }
-
-/* SIDEBAR */
 
 .sidebar {
     position: fixed;
@@ -61,8 +58,6 @@ body {
     color: white;
 }
 
-/* MAIN */
-
 .main {
     margin-left: 240px;
     padding: 35px;
@@ -90,8 +85,6 @@ body {
     border-radius: 10px;
 }
 
-/* STATS */
-
 .stats {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -116,8 +109,6 @@ body {
     font-size: 27px;
 }
 
-/* SECTIONS */
-
 .section {
     background: #171717;
     border: 1px solid #292929;
@@ -137,8 +128,6 @@ body {
     font-size: 21px;
 }
 
-/* MENU */
-
 .menu-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -150,13 +139,12 @@ body {
     border: 1px solid #303030;
     border-radius: 13px;
     padding: 18px;
-    cursor: pointer;
     transition: .2s;
 }
 
 .product:hover {
-    transform: translateY(-3px);
     border-color: #e63920;
+    transform: translateY(-2px);
 }
 
 .product h3 {
@@ -175,17 +163,63 @@ body {
     font-size: 18px;
 }
 
+.product-buttons {
+    margin-top: 15px;
+    display: flex;
+    gap: 7px;
+}
+
 .add {
-    float: right;
+    flex: 1;
     background: #e63920;
     border: none;
     color: white;
-    padding: 7px 10px;
+    padding: 9px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.edit {
+    background: #333;
+    border: none;
+    color: white;
+    padding: 9px 12px;
     border-radius: 7px;
     cursor: pointer;
 }
 
-/* PEDIDO */
+.delete {
+    background: #3a1c1c;
+    border: none;
+    color: #ff7777;
+    padding: 9px 12px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.add-menu {
+    background: #e63920;
+    color: white;
+    border: none;
+    padding: 12px 17px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.add-menu:hover {
+    background: #ff492e;
+}
+
+.no-products {
+    color: #777;
+    text-align: center;
+    padding: 35px;
+    border: 1px dashed #333;
+    border-radius: 10px;
+    grid-column: 1 / -1;
+}
 
 .order {
     background: #111;
@@ -198,6 +232,16 @@ body {
     justify-content: space-between;
     padding: 12px 0;
     border-bottom: 1px solid #292929;
+}
+
+.remove-product {
+    margin-left: 10px;
+    background: #333;
+    border: 0;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .total {
@@ -224,12 +268,6 @@ body {
     background: #ff492e;
 }
 
-.empty {
-    color: #777;
-}
-
-/* CLIENTES */
-
 .search {
     background: #222;
     border: 1px solid #333;
@@ -237,6 +275,17 @@ body {
     padding: 12px;
     border-radius: 8px;
     width: 250px;
+}
+
+.add-client {
+    background: #e63920;
+    color: white;
+    border: 0;
+    padding: 12px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 10px;
 }
 
 table {
@@ -262,27 +311,92 @@ td {
     font-weight: bold;
 }
 
-.badge {
-    background: #1d442a;
-    color: #6ee787;
-    padding: 6px 9px;
-    border-radius: 20px;
-    font-size: 12px;
+.delete-client {
+    background: #3a1c1c;
+    color: #ff7777;
+    border: 0;
+    padding: 7px 10px;
+    border-radius: 7px;
+    cursor: pointer;
 }
 
-/* RESPONSIVE */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.78);
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+}
 
-@media(max-width: 1000px) {
+.modal-box {
+    background: #181818;
+    width: 430px;
+    max-width: 90%;
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid #333;
+}
+
+.modal-box h2 {
+    margin-bottom: 20px;
+}
+
+.modal-box input,
+.modal-box textarea {
+    width: 100%;
+    background: #222;
+    border: 1px solid #333;
+    color: white;
+    padding: 13px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    font-family: Arial;
+}
+
+.modal-box textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.cancel {
+    background: #333;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    flex: 1;
+}
+
+.save {
+    background: #e63920;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    flex: 1;
+}
+
+@media(max-width:1000px) {
     .stats {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2,1fr);
     }
 
     .menu-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2,1fr);
     }
 }
 
-@media(max-width: 700px) {
+@media(max-width:700px) {
     .sidebar {
         display: none;
     }
@@ -298,6 +412,16 @@ td {
 
     .menu-grid {
         grid-template-columns: 1fr;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .search {
+        width: 100%;
     }
 }
 </style>
@@ -315,7 +439,7 @@ td {
 
     <div class="menu">
 
-        <button class="active" onclick="irA('dashboard')">
+        <button onclick="irA('dashboard')">
             📊 Dashboard
         </button>
 
@@ -338,191 +462,243 @@ td {
 
 <main class="main">
 
-    <!-- HEADER -->
+<!-- HEADER -->
 
-    <div class="header">
+<div class="header">
 
-        <div>
-            <h1>Dashboard</h1>
-            <p>Administración de Angus Brothers</p>
-        </div>
+    <div>
+        <h1>Dashboard</h1>
+        <p>Administración de Angus Brothers</p>
+    </div>
 
-        <div class="profile">
-            👤 Administrador
-        </div>
+    <div class="profile">
+        👤 Administrador
+    </div>
+
+</div>
+
+
+<!-- ESTADÍSTICAS -->
+
+<div class="stats" id="dashboard">
+
+    <div class="card">
+        <h3>CLIENTES</h3>
+        <strong id="totalClientes">0</strong>
+    </div>
+
+    <div class="card">
+        <h3>PEDIDOS HOY</h3>
+        <strong id="pedidosHoy">0</strong>
+    </div>
+
+    <div class="card">
+        <h3>VENTAS DE HOY</h3>
+        <strong id="ventasHoy">$0</strong>
+    </div>
+
+    <div class="card">
+        <h3>PRODUCTOS VENDIDOS</h3>
+        <strong id="productosVendidos">0</strong>
+    </div>
+
+</div>
+
+
+<!-- MENÚ -->
+
+<section class="section" id="menu">
+
+<div class="section-header">
+
+    <h2>🍔 Menú Angus Brothers</h2>
+
+    <button class="add-menu" onclick="abrirProducto()">
+        + Agregar producto
+    </button>
+
+</div>
+
+<div class="menu-grid" id="menuGrid"></div>
+
+</section>
+
+
+<!-- PEDIDO -->
+
+<section class="section" id="pedido">
+
+<div class="section-header">
+    <h2>🛒 Pedido actual</h2>
+</div>
+
+<div class="order">
+
+<div id="pedidoLista">
+    <div class="empty">
+        Todavía no agregaste productos.
+    </div>
+</div>
+
+<div class="total">
+
+    <span>Total</span>
+
+    <span id="totalPedido">
+        $0
+    </span>
+
+</div>
+
+<button class="finish" onclick="finalizarPedido()">
+    ✅ Registrar venta
+</button>
+
+</div>
+
+</section>
+
+
+<!-- CLIENTES -->
+
+<section class="section" id="clientes">
+
+<div class="section-header">
+
+    <h2>👥 Clientes</h2>
+
+    <div>
+
+        <input
+            class="search"
+            id="buscar"
+            placeholder="🔎 Buscar cliente..."
+            oninput="buscarCliente()"
+        >
+
+        <button class="add-client" onclick="abrirCliente()">
+            + Nuevo cliente
+        </button>
 
     </div>
 
+</div>
 
-    <!-- ESTADÍSTICAS -->
+<table>
 
-    <div class="stats" id="dashboard">
+<thead>
 
-        <div class="card">
-            <h3>CLIENTES</h3>
-            <strong id="totalClientes">0</strong>
-        </div>
+<tr>
+    <th>CLIENTE</th>
+    <th>TELÉFONO</th>
+    <th>PEDIDOS</th>
+    <th>PUNTOS</th>
+    <th>ACCIÓN</th>
+</tr>
 
-        <div class="card">
-            <h3>PEDIDOS HOY</h3>
-            <strong id="pedidosHoy">0</strong>
-        </div>
+</thead>
 
-        <div class="card">
-            <h3>VENTAS DE HOY</h3>
-            <strong id="ventasHoy">$0</strong>
-        </div>
+<tbody id="tablaClientes"></tbody>
 
-        <div class="card">
-            <h3>PRODUCTOS VENDIDOS</h3>
-            <strong id="productosVendidos">0</strong>
-        </div>
+</table>
 
-    </div>
-
-
-    <!-- MENU -->
-
-    <section class="section" id="menu">
-
-        <div class="section-header">
-            <h2>🍔 Menú Angus Brothers</h2>
-        </div>
-
-        <div class="menu-grid">
-
-            <div class="product" onclick="agregarProducto('Angus Clásica', 9500)">
-                <h3>Angus Clásica</h3>
-                <p>Carne Angus, cheddar y salsa especial.</p>
-                <span class="price">$9.500</span>
-                <button class="add">+</button>
-            </div>
-
-            <div class="product" onclick="agregarProducto('Angus Doble', 12500)">
-                <h3>Angus Doble</h3>
-                <p>Doble carne Angus y doble cheddar.</p>
-                <span class="price">$12.500</span>
-                <button class="add">+</button>
-            </div>
-
-            <div class="product" onclick="agregarProducto('Angus BBQ', 11500)">
-                <h3>Angus BBQ</h3>
-                <p>Carne Angus, cheddar, panceta y BBQ.</p>
-                <span class="price">$11.500</span>
-                <button class="add">+</button>
-            </div>
-
-            <div class="product" onclick="agregarProducto('Papas Clásicas', 4500)">
-                <h3>Papas Clásicas</h3>
-                <p>Papas fritas crocantes.</p>
-                <span class="price">$4.500</span>
-                <button class="add">+</button>
-            </div>
-
-            <div class="product" onclick="agregarProducto('Papas con Cheddar', 6000)">
-                <h3>Papas con Cheddar</h3>
-                <p>Papas, cheddar y panceta.</p>
-                <span class="price">$6.000</span>
-                <button class="add">+</button>
-            </div>
-
-            <div class="product" onclick="agregarProducto('Combo Angus', 14500)">
-                <h3>Combo Angus</h3>
-                <p>Hamburguesa + papas + bebida.</p>
-                <span class="price">$14.500</span>
-                <button class="add">+</button>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- PEDIDO -->
-
-    <section class="section" id="pedido">
-
-        <div class="section-header">
-            <h2>🛒 Pedido actual</h2>
-        </div>
-
-        <div class="order">
-
-            <div id="pedidoLista">
-                <div class="empty">
-                    Todavía no agregaste productos.
-                </div>
-            </div>
-
-            <div class="total">
-
-                <span>Total</span>
-
-                <span id="totalPedido">
-                    $0
-                </span>
-
-            </div>
-
-            <button class="finish" onclick="finalizarPedido()">
-                ✅ Registrar venta
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- CLIENTES -->
-
-    <section class="section" id="clientes">
-
-        <div class="section-header">
-
-            <h2>👥 Clientes</h2>
-
-            <input
-                class="search"
-                id="buscar"
-                placeholder="🔎 Buscar cliente..."
-                oninput="buscarCliente()"
-            >
-
-        </div>
-
-        <table>
-
-            <thead>
-
-                <tr>
-                    <th>CLIENTE</th>
-                    <th>TELÉFONO</th>
-                    <th>PEDIDOS</th>
-                    <th>PUNTOS</th>
-                </tr>
-
-            </thead>
-
-            <tbody id="tablaClientes"></tbody>
-
-        </table>
-
-    </section>
+</section>
 
 </main>
 
 
+<!-- MODAL PRODUCTO -->
+
+<div class="modal" id="productoModal">
+
+<div class="modal-box">
+
+<h2 id="tituloProducto">🍔 Agregar producto</h2>
+
+<input
+    id="productoNombre"
+    placeholder="Nombre del producto"
+>
+
+<input
+    id="productoPrecio"
+    type="number"
+    placeholder="Precio"
+>
+
+<textarea
+    id="productoDescripcion"
+    placeholder="Descripción del producto"
+></textarea>
+
+<div class="modal-buttons">
+
+<button class="cancel" onclick="cerrarProducto()">
+    Cancelar
+</button>
+
+<button class="save" onclick="guardarProducto()">
+    Guardar producto
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- MODAL CLIENTE -->
+
+<div class="modal" id="clienteModal">
+
+<div class="modal-box">
+
+<h2>👤 Nuevo cliente</h2>
+
+<input
+    id="clienteNombre"
+    placeholder="Nombre completo"
+>
+
+<input
+    id="clienteTelefono"
+    placeholder="Teléfono"
+>
+
+<input
+    id="clienteDireccion"
+    placeholder="Dirección"
+>
+
+<div class="modal-buttons">
+
+<button class="cancel" onclick="cerrarCliente()">
+    Cancelar
+</button>
+
+<button class="save" onclick="guardarCliente()">
+    Guardar cliente
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
 <script>
 
-/* =========================
+/* =================================
    DATOS
-========================= */
+================================= */
+
+let productos =
+JSON.parse(localStorage.getItem("angusProductos")) || [];
 
 let clientes =
 JSON.parse(localStorage.getItem("angusClientes")) || [];
-
-];
-
 
 let pedido = [];
 
@@ -535,26 +711,229 @@ Number(localStorage.getItem("angusPedidosHoy")) || 0;
 let productosVendidos =
 Number(localStorage.getItem("angusProductosVendidos")) || 0;
 
+let productoEditando = null;
 
-/* =========================
-   AGREGAR PRODUCTO
-========================= */
 
-function agregarProducto(nombre, precio) {
+/* =================================
+   MENÚ
+================================= */
+
+function mostrarMenu() {
+
+    const grid =
+        document.getElementById("menuGrid");
+
+    grid.innerHTML = "";
+
+    if (productos.length === 0) {
+
+        grid.innerHTML = `
+            <div class="no-products">
+                🍔 Todavía no hay productos en el menú.<br><br>
+                Tocá <strong>+ Agregar producto</strong>
+                para cargar el menú.
+            </div>
+        `;
+
+        return;
+    }
+
+    productos.forEach((producto, index) => {
+
+        grid.innerHTML += `
+
+        <div class="product">
+
+            <h3>${producto.nombre}</h3>
+
+            <p>
+                ${producto.descripcion || "Sin descripción"}
+            </p>
+
+            <span class="price">
+                $${Number(producto.precio).toLocaleString("es-AR")}
+            </span>
+
+            <div class="product-buttons">
+
+                <button
+                    class="add"
+                    onclick="agregarProducto(${index})">
+                    + Agregar al pedido
+                </button>
+
+                <button
+                    class="edit"
+                    onclick="editarProducto(${index})">
+                    ✏️
+                </button>
+
+                <button
+                    class="delete"
+                    onclick="eliminarProductoMenu(${index})">
+                    🗑️
+                </button>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+}
+
+
+/* =================================
+   AGREGAR PRODUCTO AL MENÚ
+================================= */
+
+function abrirProducto() {
+
+    productoEditando = null;
+
+    document.getElementById("tituloProducto").textContent =
+        "🍔 Agregar producto";
+
+    document.getElementById("productoNombre").value = "";
+    document.getElementById("productoPrecio").value = "";
+    document.getElementById("productoDescripcion").value = "";
+
+    document.getElementById("productoModal").style.display = "flex";
+}
+
+
+function cerrarProducto() {
+
+    document.getElementById("productoModal").style.display =
+        "none";
+}
+
+
+function guardarProducto() {
+
+    const nombre =
+        document.getElementById("productoNombre").value.trim();
+
+    const precio =
+        Number(document.getElementById("productoPrecio").value);
+
+    const descripcion =
+        document.getElementById("productoDescripcion").value.trim();
+
+
+    if (!nombre || !precio) {
+
+        alert("Completá el nombre y el precio.");
+
+        return;
+    }
+
+
+    const producto = {
+        nombre: nombre,
+        precio: precio,
+        descripcion: descripcion
+    };
+
+
+    if (productoEditando === null) {
+
+        productos.push(producto);
+
+    } else {
+
+        productos[productoEditando] = producto;
+
+    }
+
+
+    localStorage.setItem(
+        "angusProductos",
+        JSON.stringify(productos)
+    );
+
+
+    cerrarProducto();
+
+    mostrarMenu();
+}
+
+
+/* =================================
+   EDITAR PRODUCTO
+================================= */
+
+function editarProducto(index) {
+
+    const producto = productos[index];
+
+    productoEditando = index;
+
+    document.getElementById("tituloProducto").textContent =
+        "✏️ Editar producto";
+
+    document.getElementById("productoNombre").value =
+        producto.nombre;
+
+    document.getElementById("productoPrecio").value =
+        producto.precio;
+
+    document.getElementById("productoDescripcion").value =
+        producto.descripcion || "";
+
+    document.getElementById("productoModal").style.display =
+        "flex";
+}
+
+
+/* =================================
+   ELIMINAR PRODUCTO DEL MENÚ
+================================= */
+
+function eliminarProductoMenu(index) {
+
+    const producto = productos[index];
+
+    if (
+        !confirm(
+            `¿Eliminar "${producto.nombre}" del menú?`
+        )
+    ) {
+        return;
+    }
+
+
+    productos.splice(index, 1);
+
+
+    localStorage.setItem(
+        "angusProductos",
+        JSON.stringify(productos)
+    );
+
+
+    mostrarMenu();
+}
+
+
+/* =================================
+   PEDIDO
+================================= */
+
+function agregarProducto(index) {
+
+    const producto = productos[index];
 
     pedido.push({
-        nombre: nombre,
-        precio: precio
+        nombre: producto.nombre,
+        precio: Number(producto.precio)
     });
 
     mostrarPedido();
 
 }
 
-
-/* =========================
-   MOSTRAR PEDIDO
-========================= */
 
 function mostrarPedido() {
 
@@ -563,18 +942,23 @@ function mostrarPedido() {
 
     lista.innerHTML = "";
 
+
     if (pedido.length === 0) {
 
         lista.innerHTML =
-        '<div class="empty">Todavía no agregaste productos.</div>';
+            `<div class="empty">
+                Todavía no agregaste productos.
+            </div>`;
 
         document.getElementById("totalPedido").textContent =
-        "$0";
+            "$0";
 
         return;
     }
 
+
     let total = 0;
+
 
     pedido.forEach((producto, index) => {
 
@@ -582,33 +966,25 @@ function mostrarPedido() {
 
         lista.innerHTML += `
 
-            <div class="order-item">
+        <div class="order-item">
 
-                <span>
-                    ${producto.nombre}
-                </span>
+            <span>
+                ${producto.nombre}
+            </span>
 
-                <span>
-                    $${producto.precio.toLocaleString("es-AR")}
+            <span>
 
-                    <button
-                        onclick="eliminarProducto(${index})"
-                        style="
-                        margin-left:10px;
-                        background:#333;
-                        color:white;
-                        border:0;
-                        border-radius:5px;
-                        padding:4px 7px;
-                        cursor:pointer;
-                        "
-                    >
-                        ×
-                    </button>
+                $${producto.precio.toLocaleString("es-AR")}
 
-                </span>
+                <button
+                    class="remove-product"
+                    onclick="quitarDelPedido(${index})">
+                    ×
+                </button>
 
-            </div>
+            </span>
+
+        </div>
 
         `;
 
@@ -617,41 +993,37 @@ function mostrarPedido() {
 
     document.getElementById("totalPedido").textContent =
         "$" + total.toLocaleString("es-AR");
-
 }
 
 
-/* =========================
-   ELIMINAR PRODUCTO
-========================= */
-
-function eliminarProducto(index) {
+function quitarDelPedido(index) {
 
     pedido.splice(index, 1);
 
     mostrarPedido();
-
 }
 
 
-/* =========================
-   FINALIZAR PEDIDO
-========================= */
+/* =================================
+   REGISTRAR VENTA
+================================= */
 
 function finalizarPedido() {
 
     if (pedido.length === 0) {
 
-        alert("Agregá al menos un producto.");
+        alert("Agregá productos al pedido.");
 
         return;
     }
 
 
-    let total = pedido.reduce(
-        (suma, producto) => suma + producto.precio,
-        0
-    );
+    const total =
+        pedido.reduce(
+            (suma, producto) =>
+                suma + producto.precio,
+            0
+        );
 
 
     ventasHoy += total;
@@ -681,7 +1053,8 @@ function finalizarPedido() {
 
 
     alert(
-        "✅ Venta registrada por $" +
+        "✅ Venta registrada\n\n" +
+        "Total: $" +
         total.toLocaleString("es-AR")
     );
 
@@ -689,34 +1062,32 @@ function finalizarPedido() {
     pedido = [];
 
     mostrarPedido();
-
 }
 
 
-/* =========================
+/* =================================
    ESTADÍSTICAS
-========================= */
+================================= */
 
 function actualizarEstadisticas() {
-
-    document.getElementById("ventasHoy").textContent =
-        "$" + ventasHoy.toLocaleString("es-AR");
-
-    document.getElementById("pedidosHoy").textContent =
-        pedidosHoy;
-
-    document.getElementById("productosVendidos").textContent =
-        productosVendidos;
 
     document.getElementById("totalClientes").textContent =
         clientes.length;
 
+    document.getElementById("pedidosHoy").textContent =
+        pedidosHoy;
+
+    document.getElementById("ventasHoy").textContent =
+        "$" + ventasHoy.toLocaleString("es-AR");
+
+    document.getElementById("productosVendidos").textContent =
+        productosVendidos;
 }
 
 
-/* =========================
+/* =================================
    CLIENTES
-========================= */
+================================= */
 
 function mostrarClientes(lista = clientes) {
 
@@ -725,34 +1096,138 @@ function mostrarClientes(lista = clientes) {
 
     tabla.innerHTML = "";
 
+
+    if (lista.length === 0) {
+
+        tabla.innerHTML = `
+
+        <tr>
+
+            <td
+                colspan="5"
+                style="text-align:center;color:#777;padding:30px">
+
+                Todavía no hay clientes registrados.
+
+            </td>
+
+        </tr>
+
+        `;
+
+        return;
+    }
+
+
     lista.forEach(cliente => {
+
+        const index =
+            clientes.indexOf(cliente);
 
         tabla.innerHTML += `
 
-            <tr>
+        <tr>
 
-                <td>
-                    <strong>${cliente.nombre}</strong>
-                </td>
+            <td>
+                <strong>${cliente.nombre}</strong>
+            </td>
 
-                <td>
-                    ${cliente.telefono}
-                </td>
+            <td>
+                ${cliente.telefono}
+            </td>
 
-                <td>
-                    ${cliente.pedidos}
-                </td>
+            <td>
+                ${cliente.pedidos}
+            </td>
 
-                <td class="points">
-                    ⭐ ${cliente.puntos}
-                </td>
+            <td class="points">
+                ⭐ ${cliente.puntos}
+            </td>
 
-            </tr>
+            <td>
+
+                <button
+                    class="delete-client"
+                    onclick="eliminarCliente(${index})">
+
+                    🗑️ Eliminar
+
+                </button>
+
+            </td>
+
+        </tr>
 
         `;
 
     });
+}
 
+
+function abrirCliente() {
+
+    document.getElementById("clienteModal").style.display =
+        "flex";
+}
+
+
+function cerrarCliente() {
+
+    document.getElementById("clienteModal").style.display =
+        "none";
+}
+
+
+function guardarCliente() {
+
+    const nombre =
+        document.getElementById("clienteNombre")
+        .value.trim();
+
+    const telefono =
+        document.getElementById("clienteTelefono")
+        .value.trim();
+
+    const direccion =
+        document.getElementById("clienteDireccion")
+        .value.trim();
+
+
+    if (!nombre || !telefono) {
+
+        alert("Completá el nombre y el teléfono.");
+
+        return;
+    }
+
+
+    clientes.push({
+
+        nombre: nombre,
+        telefono: telefono,
+        direccion: direccion,
+        pedidos: 0,
+        puntos: 0
+
+    });
+
+
+    localStorage.setItem(
+        "angusClientes",
+        JSON.stringify(clientes)
+    );
+
+
+    document.getElementById("clienteNombre").value = "";
+    document.getElementById("clienteTelefono").value = "";
+    document.getElementById("clienteDireccion").value = "";
+
+
+    cerrarCliente();
+
+    mostrarClientes();
+
+    actualizarEstadisticas();
 }
 
 
@@ -763,21 +1238,48 @@ function buscarCliente() {
         .value
         .toLowerCase();
 
+
     const resultados =
         clientes.filter(cliente =>
             cliente.nombre
-            .toLowerCase()
-            .includes(texto)
+                .toLowerCase()
+                .includes(texto)
         );
 
-    mostrarClientes(resultados);
 
+    mostrarClientes(resultados);
 }
 
 
-/* =========================
+function eliminarCliente(index) {
+
+    if (
+        !confirm(
+            "¿Seguro que querés eliminar este cliente?"
+        )
+    ) {
+        return;
+    }
+
+
+    clientes.splice(index, 1);
+
+
+    localStorage.setItem(
+        "angusClientes",
+        JSON.stringify(clientes)
+    );
+
+
+    mostrarClientes();
+
+    actualizarEstadisticas();
+}
+
+
+/* =================================
    NAVEGACIÓN
-========================= */
+================================= */
 
 function irA(id) {
 
@@ -785,19 +1287,17 @@ function irA(id) {
         .scrollIntoView({
             behavior: "smooth"
         });
-
 }
 
 
-/* =========================
+/* =================================
    INICIO
-========================= */
+================================= */
 
-actualizarEstadisticas();
-
+mostrarMenu();
 mostrarClientes();
-
 mostrarPedido();
+actualizarEstadisticas();
 
 </script>
 
